@@ -5,16 +5,19 @@ import Nav from './nav';
 
 const Header = () => {
 
-    const [ showNav, setNav ] = useState(0)
+    const [ showNav, setNav ] = useState(false)
 
-    const HideNav = () =>{
-        setNav({showNav:false})
+    const hideNav = () =>{
+        setNav(showNav)
+        console.log("nav closed");
     }
+
 
     return(
        <header>
            <div className="open_nav">
             <FontAwesome 
+            onClick={()=> setNav(!showNav)}
             name="bars"
             style={{
                 padding: '10px',
@@ -25,7 +28,7 @@ const Header = () => {
        </div>
        <Nav 
         showNav={showNav}
-        HideNav={()=>{this.HideNav()}}
+        hideNav={()=>hideNav()}
        />
        <Link to="/" className="logo">Rate My Book</Link>
        </header>
