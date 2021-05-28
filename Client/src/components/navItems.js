@@ -1,9 +1,10 @@
 import React from 'react';
 import FontAwesome from 'react-fontawesome';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 
-const NavItems = () => {
+const NavItems = (props) => {
 
     const items = [
         {
@@ -18,35 +19,45 @@ const NavItems = () => {
             icon: 'user-circle',
             name: 'My Profile',
             link: '/user',
-            restricted: false
+            restricted: true
         },
         {
             type: 'navItem',
             icon: 'sign-in',
             name: 'Login',
             link: '/login',
-            restricted: false
+            restricted: false,
+            excluded: true
+        },
+        {
+            type: 'navItem',
+            icon: 'sign-in',
+            name: 'Register',
+            link: '/user/register',
+            restricted: false,
+            excluded: true
         },
         {
             type: 'navItem',
             icon: 'file-text-o',
             name: 'My Reviews',
             link: '/user/reviews',
-            restricted: false
+            restricted: true
         },
         {
             type: 'navItem',
             icon: 'edit',
             name: 'Add Review',
-            link: '/add-review',
-            restricted: false
+            link: '/user/add',
+            restricted: true
         },
         {
             type: 'navItem',
             icon: 'sign-out',
             name: 'Logout',
             link: '/user/logout',
-            restricted: false
+            restricted: false,
+            excluded: true
         }
     ]
 
@@ -59,19 +70,25 @@ const NavItems = () => {
         </div>
     )
 
-    const showItems = () => {
-        return(
-            items.map((item,i)=>{
-                return element(item,i)
-            })
-        )
-    }
+    console.log(props)
+    const showItems = () => (
+                items.map((item,i)=>{
+                    return element(item,i)
+                })
+    )
 
-    return(
+    return(        
         <div>
             {showItems()}
         </div>
     )
 }
 
-export default NavItems;
+function mapStateToProps(state){
+    console.log(state)
+    return{
+        user: state.user
+    }
+}
+
+export default connect(mapStateToProps)(NavItems)

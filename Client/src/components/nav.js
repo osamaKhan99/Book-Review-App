@@ -3,9 +3,11 @@ import { SideNav } from 'react-simple-sidenav';
 import NavItems from './navItems';
 
 const Nav = (props) =>{
+    console.log(props)
     return(
+        
         <div>
-            <SideNav showNav={props.showNav} hideNav={props.hideNav}
+            <SideNav showNav={props.showNav} onHideNav={props.onHideNav}
              navStyle={{
                  background:  '#2f2f2f',
                  maxWidth: '280px'
